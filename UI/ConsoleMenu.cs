@@ -6,7 +6,7 @@ namespace OperationalBackendProgrammingRepetition.UI;
 
 public class ConsoleMenu
 {
-    BookCatalog bookCatalog = new BookCatalog();
+    Catalog _catalog = new Catalog();
     
     public void RunMenu()
     {
@@ -50,7 +50,7 @@ public class ConsoleMenu
         var year = InputHelpers.ReadInt("Enter book year: ");
         var isbn = InputHelpers.ReadInt("Enter book ISBN: ");
         Console.WriteLine();
-        bookCatalog.AddBook(title, author, year, isbn);
+        _catalog.AddBook(title, author, year, isbn);
         
         Console.WriteLine();
         Console.WriteLine("Press any key to return to menu.");
@@ -61,7 +61,7 @@ public class ConsoleMenu
     {
         Console.Clear();
         Console.WriteLine("== All Books ==");
-        foreach (var book in bookCatalog.GetAllBooks())
+        foreach (var book in _catalog.GetAllBooks())
         {
             Console.WriteLine(book);
             Console.WriteLine();
@@ -76,7 +76,7 @@ public class ConsoleMenu
         Console.Clear();
         Console.WriteLine("== Books by author ==");
         var author = InputHelpers.ReadRequiredString("Enter book author: ");
-        foreach (var book in bookCatalog.FindByAuthor (author))
+        foreach (var book in _catalog.FindBookByAuthor (author))
         {
             Console.WriteLine(author);
             Console.WriteLine();
