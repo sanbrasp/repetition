@@ -14,7 +14,7 @@ public class Catalog
         _libraryItems = new List<LibraryItem>();
     }
     
-    public void AddBook(string title, string author, int year, int isbn)
+    public void AddBook(string title, string author, int year, string isbn)
     {
         title = title.Trim();
         if (string.IsNullOrWhiteSpace(title)) throw new ArgumentNullException(nameof(title));
@@ -36,7 +36,7 @@ public class Catalog
     
     public void AddItem(LibraryItem item) => _libraryItems.Add(item);
     
-    public void RemoveBook(string title, int isbn)
+    public void RemoveBook(string title, string isbn)
     {
         title = title.Trim();
         if (string.IsNullOrWhiteSpace(title)) throw new ArgumentNullException(nameof(title));
@@ -64,5 +64,10 @@ public class Catalog
             .Where(item => item.MatchesQuery(query))
             .Cast<LibraryItem>()
             .ToList();
+    }
+
+    public LibraryItem? FindByISBN(string isbn)
+    {
+        return _libraryItems.OfType<Book>().FirstOrDefault(b => b.ISBN == isbn);
     }
 }
