@@ -11,7 +11,7 @@ public class MemberService
         _members = new List<Member>();
     }
 
-    public void RegisterMember(string name, string email)
+    public Member RegisterMember(string name, string email)
     {
         name = name.Trim().ToLower();
         if (string.IsNullOrWhiteSpace(name)) throw new ArgumentNullException(nameof(name));
@@ -21,20 +21,28 @@ public class MemberService
         
         var member = new Member(name, email);
         _members.Add(member);
+        
+        return member;
     }
 
-    public void FindById()
+    public Member? FindById(string id)
     {
+        if (!Guid.TryParse(id, out Guid guid))
+            return null;
         
+        return _members
+            .FirstOrDefault(m => m.MemberId == guid);
     }
 
-    public void FindByName()
+    public IEnumerable<Member> FindByName(string name)
     {
-        
+        return _members
+            .Where(m => m.Name == name)
+            .ToList();
     }
 
-    public void GetAllMembers()
+    public IEnumerable<Member> GetAllMembers()
     {
-        
+        return _members.ToList();
     }
 }
