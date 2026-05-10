@@ -2,11 +2,13 @@
 
 public class Member
 {
-    private Guid _id;
+    private Guid _memberId;
     
     private string _name;
     private string _email;
 
+    public Guid MemberId => _memberId;
+    
     public string Name
     {
         get => _name;
@@ -17,17 +19,16 @@ public class Member
         get => _email;
         private set => _email = value;
     }
-    public Guid Id => _id;
     
     public Member(string name, string email)
         {
-        _id = Guid.NewGuid();
+        _memberId = Guid.NewGuid();
         _name = name;
         _email = email;
         }
 
     public string GetDisplayName()
     {
-        return $"ID: {_id} - {Name} - {Email}";
+        return $"ID: {_memberId} - {Name} - {Email}";
     }
 }
