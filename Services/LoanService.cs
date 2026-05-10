@@ -33,7 +33,7 @@ public class LoanService
         item.IsAvailable = true;
     }
     
-    public IEnumerable<Loan> GetLoansForMember(Member member)
+    public List<Loan> GetLoansForMember(Member member)
     {
         return _loans
             .Where(l => l.Member == member && !l.IsReturned)
